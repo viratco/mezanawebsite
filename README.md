@@ -26,8 +26,9 @@ Then open http://localhost:5173.
 
 ## Deploy on Vercel
 
-New project → import the repo → **Root Directory: `website`**. Vercel detects Vite; build command
-`npm run build`, output `dist`. Then add the domains `mezana.in` and `www.mezana.in` to this project
+The site lives in its own repo, github.com/viratco/mezanawebsite (pushed from the `website/` folder of
+the main project with `git subtree split --prefix website`). In Vercel: New project → import that repo,
+keep Root Directory `./`. Vercel detects Vite; build command `npm run build`, output `dist`. Then add the domains `mezana.in` and `www.mezana.in` to this project
 (remove them from the POS project first).
 
 ## Images

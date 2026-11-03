@@ -1,0 +1,624 @@
+<!doctype html>
+<html lang="en-IN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Mezana · Dine-in, beautifully run</title>
+    <meta
+      name="description"
+      content="Mezana is the café POS for India: QR ordering at the table, a kitchen screen that rings, GST bills, UPI, cash, card or split payments, and billing that keeps working when the internet drops."
+    />
+    <meta name="theme-color" content="#170609" />
+    <link rel="canonical" href="{{SITE_URL}}/" />
+    <link rel="icon" href="/brand/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/brand/favicon-32.png" sizes="32x32" type="image/png" />
+    <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Mezana" />
+    <meta property="og:title" content="Mezana · Dine-in, beautifully run" />
+    <meta
+      property="og:description"
+      content="QR ordering, a kitchen screen, GST bills and offline billing, in one calm POS for Indian cafés."
+    />
+    <meta property="og:url" content="{{SITE_URL}}/" />
+    <meta property="og:image" content="{{SITE_URL}}/brand/og.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script>
+      // "js" turns on the animated layouts; "motion" only when the visitor hasn't asked for less motion.
+      document.documentElement.classList.add("js");
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("motion");
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- Line icons, used with <svg><use href="#i-…"/></svg> -->
+    <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+      <defs>
+        <symbol id="i-qr" viewBox="0 0 24 24"><path d="M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h2v2h-2zM18 14h2v2h-2zM14 18h2v2h-2zM18 18h2v2h-2zM6.5 6.5h1v1h-1zM16.5 6.5h1v1h-1zM6.5 16.5h1v1h-1z" /></symbol>
+        <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 1 1 12 0v5l1.5 2h-15L6 16zM10 20.5a2 2 0 0 0 4 0" /></symbol>
+        <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4M4 20h16M8 16v-4M12 16V8M16 16v-6M20 16V6" /></symbol>
+        <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M2.5 9a14 14 0 0 1 19 0M5.5 12.5a9.5 9.5 0 0 1 13 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01" /></symbol>
+        <symbol id="i-people" viewBox="0 0 24 24"><path d="M9 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7zM2.5 20a6.5 6.5 0 0 1 13 0M16 4.5a3.5 3.5 0 0 1 0 6.5M18 14a6.5 6.5 0 0 1 3.5 6" /></symbol>
+        <symbol id="i-menu" viewBox="0 0 24 24"><path d="M6 3h12v18H6zM9 7h6M9 11h6M9 15h4" /></symbol>
+        <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M4 4h16v16H4z" /><circle cx="12" cy="12" r="3.6" /></symbol>
+        <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6M7 17H4v-8h16v8h-3M7 14h10v7H7z" /></symbol>
+        <symbol id="i-receipt" viewBox="0 0 24 24"><path d="M6 3h12v18l-2-1.5-2 1.5-2-1.5-2 1.5-2-1.5L6 21zM9 8h6M9 12h6M9 16h3" /></symbol>
+        <symbol id="i-tag" viewBox="0 0 24 24"><path d="M3 12V4h8l10 10-8 8L3 12zM7.5 8.5h.01" /></symbol>
+        <symbol id="i-cart" viewBox="0 0 24 24"><path d="M3 4h2.5l2.2 11h10.6l2-8H6.6M9 20h.01M17 20h.01" /></symbol>
+        <symbol id="i-devices" viewBox="0 0 24 24"><path d="M3 5h13v10H3zM1 18h17M18 9h5v12h-5z" /></symbol>
+        <symbol id="i-lock" viewBox="0 0 24 24"><path d="M5 11h14v10H5zM8 11V7a4 4 0 0 1 8 0v4M12 15v2" /></symbol>
+        <symbol id="i-move" viewBox="0 0 24 24"><path d="M4 12h16M16 8l4 4-4 4M8 8l-4 4 4 4" /></symbol>
+        <symbol id="i-live" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" /><path d="M6.3 6.3a8 8 0 0 0 0 11.4M17.7 6.3a8 8 0 0 1 0 11.4" /></symbol>
+        <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z" /></symbol>
+        <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" /></symbol>
+        <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></symbol>
+        <symbol id="i-sound" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></symbol>
+        <symbol id="i-mute" viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4zM17 9.5l5 5M22 9.5l-5 5" /></symbol>
+      </defs>
+    </svg>
+
+    <header class="nav" data-nav>
+      <a class="nav-brand" href="#top" aria-label="Mezana home">
+        <span class="nav-emblem"><!-- include emblem.svg --></span>
+        <span class="nav-word"><!-- include wordmark.svg --></span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#journey">How it works</a>
+        <a href="#offline">Offline</a>
+        <a href="#payments">Payments</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a class="btn btn-gold btn-sm" href="{{WA_LINK}}" target="_blank" rel="noopener" data-cta>Book a demo</a>
+    </header>
+
+    <main id="main">
+      <!-- 1 · HERO: the arch draws itself, then the camera walks through it -->
+      <section class="hero" id="top" data-hero>
+        <div class="hero-sticky">
+          <canvas class="hero-dust" data-dust aria-hidden="true"></canvas>
+          <div class="hero-glow" aria-hidden="true"></div>
+          <div class="hero-stage">
+            <div class="hero-emblem" data-hero-emblem><!-- include emblem.svg --></div>
+            <div class="hero-copy" data-hero-copy>
+              <h1 class="hero-title">
+                <span class="hero-word" data-hero-word><!-- include wordmark.svg --></span>
+                <span class="sr-only">Mezana</span>
+              </h1>
+              <div class="hero-rule" aria-hidden="true"><i></i><b></b><i></i></div>
+              <p class="hero-tag" data-hero-tag>Dine-in, beautifully run.</p>
+              <p class="hero-lede" data-hero-lede>
+                The café POS that takes orders at the table, runs your kitchen, prints GST bills, and keeps billing
+                when the internet doesn’t.
+              </p>
+              <div class="hero-ctas" data-hero-ctas>
+                <a class="btn btn-gold" href="{{WA_LINK}}" target="_blank" rel="noopener" data-cta>
+                  Book a free demo <svg class="ic"><use href="#i-arrow" /></svg>
+                </a>
+                <a class="btn btn-ghost" href="#journey">See how it works</a>
+              </div>
+            </div>
+          </div>
+          <div class="hero-scroll" data-hero-scroll aria-hidden="true"><span>Scroll</span><i></i></div>
+          <div class="hero-veil" data-hero-veil aria-hidden="true"></div>
+        </div>
+      </section>
+
+      <!-- 2 · STATEMENT -->
+      <section class="statement" id="story">
+        <div class="wrap">
+          <p class="eyebrow eyebrow-gold" data-reveal>
+            <span class="deva" lang="hi">मेज़</span> · mez · <em>the table</em>
+          </p>
+          <p class="statement-text" data-words>
+            Every café runs on its <em>tables.</em> Mezana keeps each one in order, from the first scan to the
+            final bill, so you can look after your guests instead of your paperwork.
+          </p>
+        </div>
+      </section>
+
+      <!-- 3 · FIVE DAILY HEADACHES -->
+      <section class="tensions" id="problems">
+        <div class="wrap">
+          <header class="section-head" data-reveal>
+            <p class="eyebrow">Roz ki 5 tension</p>
+            <h2 class="h2">Five daily headaches.<br /><em>One calm counter.</em></h2>
+          </header>
+        </div>
+        <div class="stack" data-stack>
+          <article class="card card-1" data-card>
+            <div class="card-text">
+              <span class="card-num">01 · Order</span>
+              <p class="card-quote">“Order likhne mein galti ho gayi.”</p>
+              <h3 class="card-title">Guests order straight from their table.</h3>
+              <p class="card-body">
+                They scan the QR, pick dishes from a menu with photos, choose sizes and add-ons, and add a cooking
+                note. It reaches your counter exactly as they meant it, with their name and number.
+              </p>
+            </div>
+            <div class="card-visual">
+              <div class="phone phone-tilt">
+                <img src="/shots/guest-list.webp" alt="Demo café QR menu on a phone, showing coffees with photos and Add buttons" loading="lazy" width="780" height="1688" />
+              </div>
+            </div>
+          </article>
+
+          <article class="card card-2" data-card>
+            <div class="card-text">
+              <span class="card-num">02 · Kitchen</span>
+              <p class="card-quote">“Kitchen tak order pahuncha hi nahi.”</p>
+              <h3 class="card-title">One tap, and the kitchen rings.</h3>
+              <p class="card-body">
+                Accept the order and it lands on the kitchen screen with a sound. When the chef marks a dish ready,
+                every staff screen shows <b>Food is ready</b>. A Yes/No check means a stray tap can’t mark it.
+              </p>
+            </div>
+            <div class="card-visual card-visual-stack">
+              <img class="float-card fc-a" src="/shots/order-card.webp" alt="New order card for Table 3 with Accept and Send to Kitchen button" loading="lazy" width="760" height="536" />
+              <img class="float-card fc-b" src="/shots/ready-popup.webp" alt="Food is ready popup for Table 6" loading="lazy" width="907" height="710" />
+            </div>
+          </article>
+
+          <article class="card card-3" data-card>
+            <div class="card-text">
+              <span class="card-num">03 · Hisaab</span>
+              <p class="card-quote">“Din ka hisaab milta hi nahi.”</p>
+              <h3 class="card-title">Every rupee adds itself up.</h3>
+              <p class="card-body">
+                Bills, payments and stock you buy are all in one place. See net sales, profit after stock, your
+                busiest hour and your top dish for today, this month or any dates you pick.
+              </p>
+            </div>
+            <div class="card-visual">
+              <img class="float-card fc-wide" src="/shots/profit.webp" alt="Profit after stock: stock bought, gross profit and profit margin" loading="lazy" width="1300" height="573" />
+            </div>
+          </article>
+
+          <article class="card card-4" data-card>
+            <div class="card-text">
+              <span class="card-num">04 · Offline</span>
+              <p class="card-quote">“Net gaya, billing band.”</p>
+              <h3 class="card-title">Internet down. Counter still up.</h3>
+              <p class="card-body">
+                Mezana keeps working on the counter device. Bills keep real invoice numbers, and everything sends
+                itself when the internet comes back.
+              </p>
+            </div>
+            <div class="card-visual">
+              <img class="float-card fc-wide" src="/shots/offline-banner.webp" alt="Offline banner: working on this device, nothing waiting to send" loading="lazy" width="1300" height="250" />
+            </div>
+          </article>
+
+          <article class="card card-5" data-card>
+            <div class="card-text">
+              <span class="card-num">05 · Guests</span>
+              <p class="card-quote">“Regular aaye, naam yaad nahi.”</p>
+              <h3 class="card-title">Know your regulars by name.</h3>
+              <p class="card-body">
+                Each QR order saves the guest’s name and number. See who came back, how often, what they spent and
+                who said it’s OK to send them offers.
+              </p>
+            </div>
+            <div class="card-visual">
+              <div class="tablet tablet-sm">
+                <img src="/shots/customers.webp" alt="Customers list with visits, spend and offer consent" loading="lazy" width="1376" height="1834" />
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- 4 · ONE ORDER, START TO FINISH (pinned story) -->
+      <section class="journey" id="journey" data-journey>
+        <div class="journey-pin">
+          <div class="journey-copy">
+            <p class="eyebrow eyebrow-gold">How it works</p>
+            <h2 class="h2 h2-light">One order,<br /><em>start to finish.</em></h2>
+            <ol class="steps" data-steps>
+              <li class="step is-active" data-n="01"><span>Scan</span><p>A guest scans the QR card on their table. No app to download.</p></li>
+              <li class="step" data-n="02"><span>Order</span><p>They browse your menu, add dishes and send the order.</p></li>
+              <li class="step" data-n="03"><span>Counter</span><p>Your counter chimes. Check they’re seated, then accept.</p></li>
+              <li class="step" data-n="04"><span>Kitchen</span><p>The kitchen screen rings. Ready dishes pop up for staff.</p></li>
+              <li class="step" data-n="05"><span>Bill</span><p>Print a GST bill and take UPI, cash, card or a mix.</p></li>
+            </ol>
+            <div class="journey-bar" aria-hidden="true"><i data-journey-bar></i></div>
+          </div>
+
+          <div class="journey-stage" aria-hidden="true">
+            <!-- step 1 -->
+            <div class="j j-tent" data-j="0">
+              <div class="tent">
+                <p class="tent-table">Table 4</p>
+                <div class="tent-qr"><!-- include qr.svg --><i class="tent-scan" data-scan></i></div>
+                <p class="tent-cta">Scan to order</p>
+                <p class="tent-note">This one really works: it opens mezana.in</p>
+              </div>
+            </div>
+            <!-- step 2 -->
+            <div class="j j-phone" data-j="1">
+              <div class="phone">
+                <img src="/shots/guest-home.webp" alt="" width="780" height="1688" />
+                <img class="j-swap" data-swap="1" src="/shots/guest-list.webp" alt="" width="780" height="1688" loading="lazy" />
+                <img class="j-swap" data-swap="2" src="/shots/guest-cart.webp" alt="" width="780" height="1688" loading="lazy" />
+              </div>
+            </div>
+            <!-- step 3 -->
+            <div class="j j-tablet" data-j="2">
+              <div class="tablet">
+                <img src="/shots/counter.webp" alt="" width="1376" height="1834" loading="lazy" />
+              </div>
+              <span class="chime" data-chime><i></i><i></i><i></i></span>
+            </div>
+            <!-- step 4 -->
+            <div class="j j-tablet" data-j="3">
+              <div class="tablet tablet-dark">
+                <img src="/shots/kitchen.webp" alt="" width="1376" height="1834" loading="lazy" />
+              </div>
+              <img class="j-pop" data-pop src="/shots/ready-popup.webp" alt="" width="907" height="710" loading="lazy" />
+            </div>
+            <!-- step 5 -->
+            <div class="j j-bill" data-j="4">
+              <div class="printer"><i></i></div>
+              <div class="receipt-roll" data-roll>
+                <img src="/shots/receipt.webp" alt="" width="544" height="1095" loading="lazy" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5 · FLOOR PLAN -->
+      <section class="floor" id="floor">
+        <div class="wrap">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow">The counter</p>
+            <h2 class="h2">Your whole café,<br /><em>at a glance.</em></h2>
+            <p class="lede">
+              A live floor plan of your tables. Each one shows its bill and how long guests have been seated, in a
+              colour that tells you what to do next.
+            </p>
+          </header>
+          <div class="floor-stage" data-floor>
+            <div class="tablet tablet-xl" data-floor-device>
+              <div class="screen">
+                <img src="/shots/floor.webp" alt="Live floor plan of the demo café with tables coloured by status" width="1376" height="1834" loading="lazy" />
+                <span class="pin pin-red" style="--x: 84.3%; --y: 37.6%" data-pin><i></i><b>New order</b></span>
+                <span class="pin pin-amber" style="--x: 50%; --y: 65.7%" data-pin><i></i><b>In the kitchen</b></span>
+                <span class="pin pin-blue" style="--x: 18.5%; --y: 37.7%" data-pin><i></i><b>Food ready</b></span>
+                <span class="pin pin-green pin-left" style="--x: 84.3%; --y: 49.5%" data-pin><i></i><b>Served</b></span>
+              </div>
+            </div>
+          </div>
+          <ul class="legend" data-reveal>
+            <li><i class="dot dot-red"></i>New order</li>
+            <li><i class="dot dot-amber"></i>In the kitchen</li>
+            <li><i class="dot dot-blue"></i>Food ready</li>
+            <li><i class="dot dot-green"></i>Served</li>
+            <li><i class="dot dot-free"></i>Free</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 6 · KITCHEN -->
+      <section class="kitchen" id="kitchen">
+        <div class="wrap kitchen-grid">
+          <div class="kitchen-copy" data-reveal>
+            <p class="eyebrow eyebrow-gold">The kitchen</p>
+            <h2 class="h2 h2-light">The kitchen<br /><em>hears it first.</em></h2>
+            <ul class="ticks">
+              <li><svg class="ic"><use href="#i-bell" /></svg><span><b>Rings on every new order.</b> No more running slips to the pass.</span></li>
+              <li><svg class="ic"><use href="#i-menu" /></svg><span><b>Big type, readable from the stove.</b> Table, quantity, options and notes.</span></li>
+              <li><svg class="ic"><use href="#i-check" /></svg><span><b>Yes or No before “ready”.</b> A splash of water can’t send a dish out.</span></li>
+              <li><svg class="ic"><use href="#i-chat" /></svg><span><b>WhatsApp, if you want it.</b> Accepting an order can open WhatsApp with the kitchen ticket ready to send to your group.</span></li>
+            </ul>
+          </div>
+          <div class="kitchen-visual" data-kitchen>
+            <div class="tablet tablet-dark tablet-lg" data-kitchen-device>
+              <img src="/shots/kitchen.webp" alt="Kitchen screen with five pending dishes and Mark ready buttons" width="1376" height="1834" loading="lazy" />
+            </div>
+            <span class="rings" aria-hidden="true"><i></i><i></i><i></i></span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7 · PAYMENTS -->
+      <section class="payments" id="payments">
+        <div class="wrap">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow">Payments</p>
+            <h2 class="h2">UPI. Cash. Card.<br /><em>Or a bit of each.</em></h2>
+            <p class="lede">
+              Split one bill across methods in seconds. Mezana checks it adds up to the full amount before it closes
+              the table, and the receipt shows exactly who paid how.
+            </p>
+          </header>
+
+          <div class="pay-grid">
+            <div class="pay-demo" data-pay>
+              <div class="pay-head">
+                <span>Take payment · Table 6</span>
+                <strong class="pay-total">₹987.00</strong>
+              </div>
+              <div class="pay-modes" role="tablist" aria-label="Payment method">
+                <button role="tab" aria-selected="false" data-mode="upi">UPI</button>
+                <button role="tab" aria-selected="false" data-mode="cash">Cash</button>
+                <button role="tab" aria-selected="false" data-mode="card">Card</button>
+                <button role="tab" aria-selected="true" data-mode="hybrid">Hybrid</button>
+              </div>
+              <div class="pay-bar" aria-hidden="true">
+                <i class="seg seg-upi" data-seg="upi"></i><i class="seg seg-cash" data-seg="cash"></i><i class="seg seg-card" data-seg="card"></i>
+              </div>
+              <ul class="pay-rows">
+                <li><span><i class="dot seg-upi"></i>UPI</span><b data-amt="upi">₹887.00</b></li>
+                <li><span><i class="dot seg-cash"></i>Cash</span><b data-amt="cash">₹100.00</b></li>
+                <li><span><i class="dot seg-card"></i>Card</span><b data-amt="card">₹0.00</b></li>
+              </ul>
+              <p class="pay-ok"><svg class="ic"><use href="#i-check" /></svg> Adds up to the full bill</p>
+              <p class="pay-hint">Tap a method above to try it.</p>
+            </div>
+            <figure class="pay-receipt" data-reveal>
+              <img src="/shots/receipt.webp" alt="Tax invoice showing Paid by UPI 887.00 and Paid by Cash 100.00" width="544" height="1095" loading="lazy" />
+              <figcaption>The receipt lists every method used.</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8 · OFFLINE (pinned, the lights go out) -->
+      <section class="offline" id="offline">
+        <div class="offline-track" data-offline>
+        <div class="offline-pin">
+          <div class="offline-bg" data-off-bg aria-hidden="true"></div>
+          <div class="wrap offline-grid">
+            <div class="offline-copy">
+              <p class="eyebrow" data-off-eyebrow>Offline mode</p>
+              <h2 class="h2 offline-h">
+                <span class="off-line" data-off-a>Internet gaya?</span>
+                <span class="off-line off-gold" data-off-b><em>Billing chalu.</em></span>
+              </h2>
+              <p class="offline-lede" data-off-lede>
+                When the Wi-Fi drops, Mezana keeps running on the counter device: take orders, print kitchen slips
+                and bills, and take payment. When it’s back, everything sends itself.
+              </p>
+            </div>
+
+            <div class="device-mini" data-off-device aria-hidden="true">
+              <div class="dm-top">
+                <span class="dm-name">Counter</span>
+                <span class="dm-pill" data-off-pill><i></i><b data-off-pill-text>Live</b></span>
+                <span class="dm-wifi" data-off-wifi>
+                  <svg viewBox="0 0 24 24"><path class="w3" d="M2.5 9a14 14 0 0 1 19 0" /><path class="w2" d="M5.5 12.5a9.5 9.5 0 0 1 13 0" /><path class="w1" d="M8.5 16a5 5 0 0 1 7 0" /><circle class="w0" cx="12" cy="19.5" r="1.3" /></svg>
+                  <i class="dm-slash" data-off-slash></i>
+                </span>
+              </div>
+              <ol class="dm-bills">
+                <li data-off-bill><span class="dm-inv" data-inv="BB/2026-27/A0001">BB/2026-27/A0001</span><span>Table 2 · ₹460.00</span><em data-off-state>Saved on this device</em></li>
+                <li data-off-bill><span class="dm-inv" data-inv="BB/2026-27/A0002">BB/2026-27/A0002</span><span>Table 7 · ₹1,218.00</span><em data-off-state>Saved on this device</em></li>
+                <li data-off-bill><span class="dm-inv" data-inv="BB/2026-27/A0003">BB/2026-27/A0003</span><span>Table 9 · ₹315.00</span><em data-off-state>Saved on this device</em></li>
+              </ol>
+              <p class="dm-foot" data-off-foot>Waiting for the internet…</p>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="wrap">
+          <ul class="facts" data-facts>
+            <li><b>Opens with no internet.</b> The counter page and your menu are kept on the device.</li>
+            <li><b>Real invoice numbers.</b> Each counter gets its own offline series, so a printed bill is final and never clashes.</li>
+            <li><b>Never doubled.</b> Changes are sent oldest first, and sending one twice can’t create a second bill.</li>
+            <li><b>Guests can still order.</b> QR orders go through on the guest’s own mobile data.</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- 9 · NUMBERS -->
+      <section class="numbers" id="numbers">
+        <div class="wrap">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow eyebrow-gold">Hisaab</p>
+            <h2 class="h2 h2-light">Know your numbers.<br /><em>Don’t guess them.</em></h2>
+            <p class="lede lede-light">
+              Pick a range (today, yesterday, 7 days, this month or your own dates) and filter by payment, table
+              or time of day. Every number compares itself with the period before.
+            </p>
+          </header>
+
+          <div class="stats" data-stats>
+            <div class="stat"><span>Net sales</span><b data-count="142102" data-prefix="₹">₹1,42,102</b><em>before GST</em></div>
+            <div class="stat"><span>Profit after stock</span><b data-count="95105" data-prefix="₹">₹95,105</b><em>net sales minus stock bought</em></div>
+            <div class="stat"><span>Average bill</span><b data-count="877" data-prefix="₹">₹877</b><em>per paid bill</em></div>
+            <div class="stat"><span>Items sold</span><b data-count="522">522</b><em>across 162 bills</em></div>
+          </div>
+
+          <div class="insights" data-reveal>
+            <div><span>Busiest slot</span><b>Tuesdays, 8pm–9pm</b></div>
+            <div><span>Top dish</span><b>Crispy Chicken Burger · 40 sold</b></div>
+            <div><span>Best pairing</span><b>Classic Veg Burger + Hazelnut Frappe</b></div>
+          </div>
+
+          <div class="profit" data-profit>
+            <div class="profit-bar"><i class="pb-stock" data-pb-stock></i><i class="pb-left" data-pb-left></i></div>
+            <div class="profit-legend">
+              <span><i class="dot pb-stock"></i>Stock: ₹33 of every ₹100 sold</span>
+              <span><i class="dot pb-left"></i>Left after stock: ₹67</span>
+            </div>
+          </div>
+          <p class="demo-note">Figures from our demo café, Brew &amp; Bloom, over 7 days.</p>
+        </div>
+      </section>
+
+      <!-- 10 · EVERYTHING ELSE -->
+      <section class="more" id="more">
+        <div class="wrap">
+          <header class="section-head" data-reveal>
+            <p class="eyebrow">Also included</p>
+            <h2 class="h2">The little things,<br /><em>done properly.</em></h2>
+          </header>
+          <div class="bento" data-bento>
+            <article class="tile tile-big">
+              <svg class="ic ic-lg"><use href="#i-menu" /></svg>
+              <h3>A menu you control</h3>
+              <p>Categories, sub-categories, photos, sizes, options and add-ons. Change a price and the next guest who scans sees it.</p>
+              <div class="tile-phone"><img src="/shots/guest-home.webp" alt="QR menu home with photo categories" width="780" height="1688" loading="lazy" /></div>
+            </article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-receipt" /></svg><h3>GST tax invoices</h3><p>Your GSTIN and FSSAI, CGST and SGST split, and a clean invoice series for each financial year.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-print" /></svg><h3>58 mm or 80 mm</h3><p>Print bills and kitchen slips on the thermal printer at your counter.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-qr" /></svg><h3>QR table cards</h3><p>Print a card for every table, straight from Mezana.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-leaf" /></svg><h3>Veg only, in one tap</h3><p>Guests can filter the menu to veg dishes and search for anything.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-tag" /></svg><h3>Discounts with a reason</h3><p>Every discount is shown on the bill and in your Bills list.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-cart" /></svg><h3>Purchases &amp; supplier dues</h3><p>Log the stock you buy and see what you still owe each supplier.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-move" /></svg><h3>Move, remove, reprint</h3><p>Shift guests to another table. Removed dishes stay visible, struck through. Reprint any old bill.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-live" /></svg><h3>Live on every screen</h3><p>Counter, kitchen and every staff phone update the moment something changes.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-devices" /></svg><h3>No new hardware</h3><p>Runs in the browser on the phones, tablets and laptops you already have.</p></article>
+            <article class="tile"><svg class="ic ic-lg"><use href="#i-lock" /></svg><h3>Your data, walled off</h3><p>Each café’s data is separated by the database itself. Prices are checked on our server, never taken from a guest’s phone.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11 · FILM -->
+      <section class="film" id="film">
+        <div class="wrap film-grid">
+          <div class="film-copy" data-reveal>
+            <p class="eyebrow eyebrow-gold">The 49-second tour</p>
+            <h2 class="h2 h2-light">Rather watch<br /><em>than read?</em></h2>
+            <p class="lede lede-light">Five problems, five answers, in Hinglish. Turn the sound on.</p>
+          </div>
+          <div class="film-phone" data-film>
+            <div class="phone phone-lg">
+              <video data-video src="/media/mezana-reel.mp4" poster="/media/reel-poster.jpg" muted loop playsinline preload="none" width="720" height="1280"></video>
+            </div>
+            <button class="film-sound" type="button" data-sound aria-pressed="false">
+              <svg class="ic" data-sound-off><use href="#i-mute" /></svg>
+              <svg class="ic" data-sound-on hidden><use href="#i-sound" /></svg>
+              <span data-sound-label>Sound off</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- 12 · HOW TO START -->
+      <section class="start" id="start">
+        <div class="wrap">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow eyebrow-gold">Getting started</p>
+            <h2 class="h2 h2-light">Live in <em>three steps.</em></h2>
+          </header>
+          <ol class="start-steps" data-start>
+            <li>
+              <span class="start-num">१</span>
+              <h3>Book a free demo</h3>
+              <p>Message us on WhatsApp. We’ll show you Mezana running a real café counter, on your own phone.</p>
+            </li>
+            <li>
+              <span class="start-num">२</span>
+              <h3>We set it up with you</h3>
+              <p>Your menu, tables, bill details and logins, ready before your first service.</p>
+            </li>
+            <li>
+              <span class="start-num">३</span>
+              <h3>Put the QR cards out</h3>
+              <p>Print a card for each table and start taking orders. That’s it.</p>
+            </li>
+          </ol>
+          <div class="center" data-reveal>
+            <a class="btn btn-gold btn-lg" href="{{WA_LINK}}" target="_blank" rel="noopener" data-cta>
+              Book a free demo <svg class="ic"><use href="#i-arrow" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 13 · FAQ -->
+      <section class="faq" id="faq">
+        <div class="wrap wrap-narrow">
+          <header class="section-head center" data-reveal>
+            <p class="eyebrow">Questions</p>
+            <h2 class="h2">Good to <em>know.</em></h2>
+          </header>
+          <div class="faq-list" data-faq>
+            <details>
+              <summary>Do I need to buy new hardware?</summary>
+              <div><p>No. Mezana runs in the browser on the phones, tablets and laptops you already have. For printed bills, use a 58 mm or 80 mm thermal printer connected to your counter device.</p></div>
+            </details>
+            <details>
+              <summary>What happens when the internet goes down?</summary>
+              <div><p>The counter keeps working on its device. You can add dishes, accept QR orders already on screen, print kitchen slips and bills, and take payment. Bills keep real invoice numbers. When the internet is back, everything is sent in order, and nothing is ever doubled.</p></div>
+            </details>
+            <details>
+              <summary>Do guests have to download an app?</summary>
+              <div><p>No. They scan the QR card on their table and the menu opens in their phone’s browser.</p></div>
+            </details>
+            <details>
+              <summary>Do guests pay on their phone?</summary>
+              <div><p>No. Guests order from their phone and pay at the counter as they do today, by UPI, cash, card or a mix of these.</p></div>
+            </details>
+            <details>
+              <summary>Can I change my menu and prices myself?</summary>
+              <div><p>Yes. From the Menu page you can add dishes, photos, categories, sizes, options and add-ons, and change prices. The next guest who scans sees the new menu.</p></div>
+            </details>
+            <details>
+              <summary>Are the bills GST-ready?</summary>
+              <div><p>Yes. Mezana prints tax invoices with your GSTIN and FSSAI number, CGST and SGST shown separately, and an invoice number series for each financial year.</p></div>
+            </details>
+            <details>
+              <summary>Is my café’s data safe?</summary>
+              <div><p>Each café’s orders, bills and guest list are walled off from every other café by the database itself, and each login belongs to one café only. Prices are always taken from your menu on our server, never from the guest’s phone.</p></div>
+            </details>
+            <details>
+              <summary>How much does it cost?</summary>
+              <div><p>It depends on the size of your café. Message us on WhatsApp and we’ll give you a straight answer, along with your free demo.</p></div>
+            </details>
+          </div>
+        </div>
+      </section>
+
+      <!-- 14 · CLOSING -->
+      <section class="closing" id="contact">
+        <div class="closing-glow" aria-hidden="true"></div>
+        <div class="wrap center">
+          <div class="closing-emblem" data-closing><!-- include emblem.svg --></div>
+          <h2 class="h2 h2-light closing-h" data-reveal>Your tables<br /><em>are waiting.</em></h2>
+          <p class="closing-hi" lang="hi" data-reveal><span class="deva">चलिए, शुरू करते हैं।</span></p>
+          <div class="hero-ctas" data-reveal>
+            <a class="btn btn-gold btn-lg" href="{{WA_LINK}}" target="_blank" rel="noopener" data-cta>
+              Book a free demo <svg class="ic"><use href="#i-arrow" /></svg>
+            </a>
+            <a class="btn btn-ghost" href="{{APP_URL}}">Café login</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="wrap footer-grid">
+        <div class="footer-brand">
+          <span class="footer-emblem"><!-- include emblem.svg --></span>
+          <div>
+            <span class="footer-word"><!-- include wordmark.svg --></span>
+            <p>Dine-in, beautifully run.</p>
+          </div>
+        </div>
+        <ul class="footer-links">
+          <li><a href="#journey">How it works</a></li>
+          <li><a href="#offline">Offline mode</a></li>
+          <li><a href="#payments">Payments</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+        <ul class="footer-links">
+          <li><a href="{{WA_LINK}}" target="_blank" rel="noopener">WhatsApp us</a></li>
+          <li data-need="instagram"><a href="https://instagram.com/{{INSTAGRAM}}" target="_blank" rel="noopener">Instagram</a></li>
+          <li data-need="email"><a href="mailto:{{EMAIL}}">{{EMAIL}}</a></li>
+          <li><a href="{{APP_URL}}">Café login</a></li>
+        </ul>
+      </div>
+      <div class="wrap footer-base">
+        <p>© {{YEAR}} Mezana. Made in India.</p>
+        <p>Screens shown are from our demo café, Brew &amp; Bloom.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

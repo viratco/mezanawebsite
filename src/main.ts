@@ -11,8 +11,12 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SplitText } from "gsap/SplitText";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import Lenis from "lenis";
+import { inject } from "@vercel/analytics";
 
 gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
+
+// Vercel Web Analytics: visitors and page views (no cookies).
+inject();
 
 const motion = document.documentElement.classList.contains("motion");
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel)!;

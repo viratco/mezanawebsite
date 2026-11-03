@@ -1031,11 +1031,6 @@ em {
   letter-spacing: 0.22em;
   text-transform: uppercase;
 }
-.tent-note {
-  margin-top: 10px;
-  font-size: 12px;
-  color: var(--text-2);
-}
 /* the receipt printer */
 .j-bill {
   align-content: center;

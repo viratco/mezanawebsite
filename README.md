@@ -12,7 +12,7 @@ It is separate from the POS app in `../frontend`, which runs at `app.mezana.in`.
 | `instagram` | Your handle without `@`. Left empty, the Instagram link is hidden. |
 | `email` | Left empty, the email link is hidden. |
 | `appUrl` | Where "Café login" goes: `https://app.mezana.in`. |
-| `siteUrl` | `https://mezana.in` (used for the link preview image). |
+| `siteUrl` | `https://www.mezana.in`, the address the site is served on (Vercel redirects mezana.in there). Used for the canonical link, link preview image, structured data, robots.txt and sitemap.xml. |
 
 ## Run it
 

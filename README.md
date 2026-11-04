@@ -13,6 +13,7 @@ It is separate from the POS app in `../frontend`, which runs at `app.mezana.in`.
 | `email` | Left empty, the email link is hidden. |
 | `appUrl` | Where "Café login" goes: `https://app.mezana.in`. |
 | `siteUrl` | `https://www.mezana.in`, the address the site is served on (Vercel redirects mezana.in there). Used for the canonical link, link preview image, structured data, robots.txt and sitemap.xml. |
+| `clarityProjectId` | Microsoft Clarity project ID (clarity.microsoft.com → your project → Settings → Overview). Turns on session recordings and heatmaps. Left empty, Clarity is off. |
 
 ## Run it
 

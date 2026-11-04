@@ -8,6 +8,7 @@ type SiteConfig = {
   email: string;
   appUrl: string;
   siteUrl: string;
+  clarityProjectId: string;
 };
 
 const readConfig = (): SiteConfig => JSON.parse(fs.readFileSync("site.config.json", "utf8"));
@@ -89,5 +90,6 @@ function site(): Plugin {
 
 export default defineConfig({
   plugins: [site()],
+  define: { __CLARITY_ID__: JSON.stringify(readConfig().clarityProjectId.trim()) },
   build: { target: "es2020", assetsInlineLimit: 0 },
 });

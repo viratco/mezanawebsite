@@ -12,11 +12,25 @@ import { SplitText } from "gsap/SplitText";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import Lenis from "lenis";
 import { inject } from "@vercel/analytics";
+import Clarity from "@microsoft/clarity";
+
+declare const __CLARITY_ID__: string;
 
 gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
 
 // Vercel Web Analytics: visitors and page views (no cookies).
 inject();
+
+// Microsoft Clarity: session recordings and heatmaps. Off until clarityProjectId is set in site.config.json.
+if (__CLARITY_ID__) {
+  Clarity.init(__CLARITY_ID__);
+  // Demo and login clicks show up as Clarity events, so recordings can be filtered by them.
+  document.addEventListener("click", (e) => {
+    const a = (e.target as Element).closest?.("a");
+    if (a?.href.includes("wa.me")) Clarity.event("demo-whatsapp-click");
+    else if (a?.href.startsWith("https://app.mezana.in")) Clarity.event("cafe-login-click");
+  });
+}
 
 const motion = document.documentElement.classList.contains("motion");
 const $ = <T extends Element = HTMLElement>(sel: string, root: ParentNode = document) => root.querySelector<T>(sel)!;

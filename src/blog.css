@@ -1,0 +1,432 @@
+/* ───────────────────────── Mezana · blog ─────────────────────────
+   Light reading pages under the brand's maroon header: serif headings, a 700px reading column. */
+:root {
+  --ink: #170609;
+  --maroon: #5e1420;
+  --maroon-2: #7a1b2b;
+  --gold: #be9445;
+  --gold-deep: #8a6a2c;
+  --ivory: #f7eedd;
+  --paper: #fbf7ef;
+  --card: #ffffff;
+  --text: #2a1a14;
+  --text-2: #6b5a50;
+  --line: #eadfca;
+  --serif: "Cormorant Garamond", "Iowan Old Style", Georgia, serif;
+  --sans: "Inter Tight Variable", "Inter Tight", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --gutter: max(16px, env(safe-area-inset-left, 0px));
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--text);
+  font: 18px/1.7 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+a {
+  color: var(--maroon-2);
+}
+a:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.bwrap {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+  padding-left: max(20px, env(safe-area-inset-left, 0px));
+  padding-right: max(20px, env(safe-area-inset-right, 0px));
+}
+
+/* brand marks (same artwork as the homepage) */
+.emblem {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.emblem .em-finial,
+.emblem .em-m,
+.emblem .em-base,
+.emblem .em-petal {
+  fill: var(--gold);
+}
+.emblem .em-outer {
+  fill: var(--ivory);
+  stroke: var(--gold);
+  stroke-width: 7;
+}
+.emblem .em-inner {
+  fill: var(--maroon);
+}
+.emblem .em-cusp {
+  fill: none;
+  stroke: var(--gold);
+  stroke-width: 4;
+}
+.emblem .em-petal {
+  stroke: var(--maroon);
+  stroke-width: 3;
+}
+.wordmark {
+  display: block;
+  width: 100%;
+  height: auto;
+  fill: currentColor;
+}
+
+/* header */
+.bnav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 12px max(20px, env(safe-area-inset-left, 0px));
+  background: var(--ink);
+  border-bottom: 1px solid rgba(190, 148, 69, 0.3);
+}
+.bnav-brand,
+.bfoot-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--ivory);
+}
+.bnav-emblem {
+  width: 24px;
+  height: 30px;
+  flex: none;
+}
+.bnav-word {
+  width: 96px;
+}
+.bnav-links {
+  display: flex;
+  gap: 22px;
+  margin-left: auto;
+  font-size: 15px;
+}
+.bnav-links a {
+  color: rgba(247, 238, 221, 0.78);
+  text-decoration: none;
+}
+.bnav-links a:hover {
+  color: var(--ivory);
+}
+@media (max-width: 520px) {
+  .bnav-links {
+    display: none;
+  }
+  .bnav .bbtn {
+    margin-left: auto;
+  }
+}
+
+/* buttons */
+.bbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font: 600 16px/1.2 var(--sans);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.bbtn-gold {
+  background: linear-gradient(180deg, #d6b066, var(--gold));
+  color: #2a0d12;
+}
+.bbtn-gold:hover {
+  filter: brightness(1.05);
+}
+.bbtn-ghost {
+  color: var(--ivory);
+  box-shadow: inset 0 0 0 1px rgba(247, 238, 221, 0.4);
+}
+.bbtn-sm {
+  min-height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+}
+
+/* article head */
+.crumbs {
+  display: flex;
+  gap: 8px;
+  padding-top: 28px;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.crumbs a {
+  color: var(--text-2);
+  text-decoration: none;
+}
+.crumbs a:hover {
+  color: var(--maroon);
+}
+.bhead {
+  padding: 28px 0 8px;
+}
+.bindex .bhead {
+  padding-top: 56px;
+}
+.btag {
+  margin: 0 0 12px;
+  font-size: 13px;
+  font-weight: 650;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+h1,
+.bbody h2,
+.bbody h3,
+.bcta h2,
+.brel h2,
+.bcard h3 {
+  font-family: var(--serif);
+  font-weight: 600;
+  color: var(--ink);
+  text-wrap: balance;
+}
+h1 {
+  margin: 0;
+  font-size: clamp(36px, 7vw, 54px);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+}
+.blede {
+  margin: 18px 0 0;
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.bmeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin: 22px 0 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+
+/* table of contents */
+.btoc {
+  margin: 28px 0 8px;
+  padding: 16px 22px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+.btoc summary {
+  cursor: pointer;
+  font-weight: 650;
+  font-size: 15px;
+}
+.btoc ol {
+  margin: 10px 0 2px;
+  padding-left: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.btoc a {
+  text-decoration: none;
+}
+.btoc a:hover {
+  text-decoration: underline;
+}
+
+/* body */
+.bbody {
+  padding: 8px 0 24px;
+}
+.bbody h2 {
+  margin: 48px 0 12px;
+  font-size: clamp(28px, 5vw, 36px);
+  line-height: 1.15;
+}
+.bbody h3 {
+  margin: 30px 0 8px;
+  font-size: 25px;
+  line-height: 1.2;
+}
+.bbody p,
+.bbody ul,
+.bbody ol {
+  margin: 0 0 18px;
+}
+.bbody ul,
+.bbody ol {
+  padding-left: 24px;
+}
+.bbody li {
+  margin: 6px 0;
+}
+.bbody strong {
+  color: var(--ink);
+}
+.bbody blockquote {
+  margin: 24px 0;
+  padding: 16px 20px;
+  background: #f6ead6;
+  border-left: 4px solid var(--gold);
+  border-radius: 0 12px 12px 0;
+}
+.bbody blockquote p:last-child {
+  margin: 0;
+}
+.bbody hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 36px 0;
+}
+.table {
+  overflow-x: auto;
+  margin: 0 0 22px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--card);
+}
+.table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 16px;
+  line-height: 1.45;
+}
+.table th,
+.table td {
+  padding: 11px 14px;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+}
+.table th {
+  background: #f6ead6;
+  font-weight: 650;
+}
+.table tr:last-child td {
+  border-bottom: 0;
+}
+
+/* call to action */
+.bcta {
+  margin: 24px 0 8px;
+  padding: 30px 28px;
+  border-radius: 20px;
+  background: radial-gradient(120% 140% at 0% 0%, var(--maroon-2), var(--ink));
+  color: var(--ivory);
+}
+.bcta-k {
+  margin: 0 0 6px;
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 650;
+}
+.bcta h2 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  line-height: 1.1;
+  color: var(--ivory);
+}
+.bcta p {
+  margin: 0 0 18px;
+  color: rgba(247, 238, 221, 0.86);
+}
+.bcta-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0 !important;
+}
+
+/* cards */
+.brel {
+  padding: 40px 0 8px;
+}
+.brel h2 {
+  margin: 0 0 16px;
+  font-size: 30px;
+}
+.bcards {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.bindex .bcards {
+  padding: 32px 0 64px;
+}
+.bcard a {
+  display: block;
+  padding: 22px 22px 20px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  color: var(--text);
+  text-decoration: none;
+  transition:
+    border-color 0.2s,
+    transform 0.2s;
+}
+.bcard a:hover {
+  border-color: var(--gold);
+  transform: translateY(-2px);
+}
+.bcard .btag {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+.bcard h3 {
+  margin: 0 0 8px;
+  font-size: 26px;
+  line-height: 1.15;
+}
+.bcard p {
+  margin: 0 0 12px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--text-2);
+}
+.bcard-meta {
+  font-size: 13px;
+  color: var(--text-2);
+}
+
+/* footer */
+.bfoot {
+  margin-top: 56px;
+  padding: 40px 0 48px;
+  background: var(--ink);
+  color: rgba(247, 238, 221, 0.75);
+  font-size: 15px;
+}
+.bfoot-in p {
+  margin: 14px 0 0;
+}
+.bfoot a {
+  color: rgba(247, 238, 221, 0.9);
+}
+.bfoot-copy {
+  font-size: 13px;
+  opacity: 0.7;
+}

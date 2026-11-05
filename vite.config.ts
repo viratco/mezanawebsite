@@ -1,5 +1,6 @@
 import fs from "node:fs";
 import { defineConfig, type Plugin } from "vite";
+import { blog, readPosts } from "./blog";
 
 type SiteConfig = {
   whatsappNumber: string;
@@ -12,6 +13,8 @@ type SiteConfig = {
 };
 
 const readConfig = (): SiteConfig => JSON.parse(fs.readFileSync("site.config.json", "utf8"));
+const waLink = (c: SiteConfig) => { const wa = c.whatsappNumber.replace(/\D/g, ""); return wa ? `https://wa.me/${wa}?text=${encodeURIComponent(c.whatsappMessage)}` : "/#start"; };
+const brandSvg = (f: string) => fs.readFileSync(`src/brand/${f}`, "utf8");
 const text = (html: string) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
 // What search engines read about Mezana: the company, the product, and the FAQ exactly as shown on the page.
@@ -60,7 +63,7 @@ function site(): Plugin {
       const wa = c.whatsappNumber.replace(/\D/g, "");
       if (!wa) console.warn("\n⚠  site.config.json: whatsappNumber is empty, so demo buttons point to #start\n");
       const tokens: Record<string, string> = {
-        WA_LINK: wa ? `https://wa.me/${wa}?text=${encodeURIComponent(c.whatsappMessage)}` : "#start",
+        WA_LINK: wa ? waLink(c) : "#start",
         INSTAGRAM: c.instagram.replace(/^@/, ""),
         EMAIL: c.email,
         APP_URL: c.appUrl,
@@ -74,22 +77,23 @@ function site(): Plugin {
         .replace(/\{\{(\w+)\}\}/g, (_, k: string) => tokens[k] ?? "");
       return page.replace("</head>", `    ${structuredData(page, c, wa)}\n  </head>`);
     },
-    // robots.txt and sitemap.xml, pointing at the address in site.config.json.
+    // robots.txt and sitemap.xml (home, blog and every post), pointing at the address in site.config.json.
     generateBundle() {
       const { siteUrl } = readConfig();
-      const today = new Date().toISOString().slice(0, 10);
+      const today = new Date().toISOString().slice(0, 10), posts = readPosts();
+      const urls = [[`${siteUrl}/`, today], [`${siteUrl}/blog/`, posts[0]?.updated ?? today], ...posts.map((p) => [`${siteUrl}/blog/${p.slug}/`, p.updated])];
       this.emitFile({ type: "asset", fileName: "robots.txt", source: `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n` });
       this.emitFile({
         type: "asset",
         fileName: "sitemap.xml",
-        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url><loc>${siteUrl}/</loc><lastmod>${today}</lastmod></url>\n</urlset>\n`,
+        source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map(([u, d]) => `  <url><loc>${u}</loc><lastmod>${d}</lastmod></url>`).join("\n")}\n</urlset>\n`,
       });
     },
   };
 }
 
 export default defineConfig({
-  plugins: [site()],
+  plugins: [site(), blog(() => { const c = readConfig(); return { siteUrl: c.siteUrl, waLink: waLink(c) }; }, () => ({ emblem: brandSvg("emblem.svg"), word: brandSvg("wordmark.svg") }))],
   define: { __CLARITY_ID__: JSON.stringify(readConfig().clarityProjectId.trim()) },
   build: { target: "es2020", assetsInlineLimit: 0 },
 });

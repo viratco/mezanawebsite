@@ -15,6 +15,23 @@ It is separate from the POS app in `../frontend`, which runs at `app.mezana.in`.
 | `siteUrl` | `https://www.mezana.in`, the address the site is served on (Vercel redirects mezana.in there). Used for the canonical link, link preview image, structured data, robots.txt and sitemap.xml. |
 | `clarityProjectId` | Microsoft Clarity project ID (clarity.microsoft.com → your project → Settings → Overview). Turns on session recordings and heatmaps. Left empty, Clarity is off. |
 
+## Blog
+
+Posts live in `content/blog/`, one Markdown file each. The file name is the address: `content/blog/qr-code-ordering-for-restaurants.md` becomes `www.mezana.in/blog/qr-code-ordering-for-restaurants/`. Each file starts with:
+
+```
+---
+title: The page title (also the H1)
+description: One or two sentences for Google and link previews (about 150 characters)
+date: 2026-11-05
+updated: 2026-12-01   (optional, when you revise a post)
+order: 1              (optional, position on the blog page among posts with the same date)
+tag: QR ordering
+---
+```
+
+Use `##` for sections (they become the table of contents) and finish with a `## Frequently asked questions` section of `###` questions: those also go to Google as FAQ data. The build adds every post to `sitemap.xml` and `blog/rss.xml`.
+
 ## Run it
 
 ```bash

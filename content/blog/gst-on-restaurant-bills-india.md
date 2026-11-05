@@ -63,7 +63,7 @@ Under guidelines from the Central Consumer Protection Authority, a restaurant **
 
 ## How your POS should help
 
-Good café billing software handles the rules for you: your GSTIN and FSSAI number on every invoice, CGST and SGST calculated and shown separately, discounts recorded with a reason, and a clean invoice series that rolls over each April. Mezana does all of this and prints on 58 mm or 80 mm thermal printers. For the wider checklist, read our [guide to choosing a café POS](/blog/best-pos-software-for-cafes-india/).
+Good café billing software handles the rules for you: your GSTIN and FSSAI number on every invoice, CGST and SGST calculated and shown separately, discounts recorded with a reason, and a clean invoice series that rolls over each April. [Mezana’s restaurant billing software](/restaurant-billing-software/) does all of this and prints on 58 mm or 80 mm thermal printers. For the wider checklist, read our [guide to choosing a café POS](/blog/best-pos-software-for-cafes-india/).
 
 ## Frequently asked questions
 

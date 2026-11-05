@@ -71,7 +71,7 @@ Many cafés start with a kitchen screen on an old tablet and keep a 58 mm printe
 
 If you are also adding [QR table ordering](/blog/qr-code-ordering-for-restaurants/), orders from guests’ phones should flow to the same kitchen screen after the counter accepts them.
 
-Mezana’s kitchen screen does all of the above and runs in the browser on any tablet. [See it in action](/#journey).
+[Mezana’s KOT software and kitchen screen](/kot-software/) does all of the above and runs in the browser on any tablet. [See it in action](/#journey).
 
 ## Frequently asked questions
 

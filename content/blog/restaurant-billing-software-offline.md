@@ -61,7 +61,7 @@ Be clear about what an outage affects:
 
 Bills made on paper during an outage are the easiest sales to lose. They skip your GST records, they don’t show up in the day’s closing, and cash from them is hard to match. Offline billing keeps every sale in the system, which keeps your [GST records](/blog/gst-on-restaurant-bills-india/) and your cash closing honest.
 
-Mezana keeps running on the counter device when the Wi-Fi drops: you can take orders, print kitchen slips and bills and take payment. Each counter has its own offline invoice series, so a printed bill is final and never clashes, and QR orders still go through on guests’ own mobile data. [See offline mode](/#offline).
+[Mezana’s restaurant billing software](/restaurant-billing-software/) keeps running on the counter device when the Wi-Fi drops: you can take orders, print kitchen slips and bills and take payment. Each counter has its own offline invoice series, so a printed bill is final and never clashes, and QR orders still go through on guests’ own mobile data. [See offline mode](/#offline).
 
 ## Frequently asked questions
 

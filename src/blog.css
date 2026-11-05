@@ -645,3 +645,11 @@ h1 {
 .lp .bcta {
   margin-top: 56px;
 }
+.lp-p {
+  margin: 0 0 18px;
+}
+.lp-more {
+  margin: 18px 0 0;
+  font-size: 15px;
+  color: var(--text-2);
+}

@@ -81,7 +81,7 @@ Prices vary a lot, so compare the **first-year total**, not the headline number.
 
 ## Where Mezana fits
 
-We built [Mezana](/) for dine-in cafés and small restaurants in India. It does QR table ordering, a kitchen screen, GST tax invoices, UPI, cash and card on one bill, and billing that keeps going offline, all in the browser on phones, tablets and laptops you already have. If most of your orders come from delivery apps rather than tables, prioritise a system built around delivery integrations instead.
+We built [Mezana’s café POS software](/cafe-pos-software/) for dine-in cafés and small restaurants in India. It does QR table ordering, a kitchen screen, GST tax invoices, UPI, cash and card on one bill, and billing that keeps going offline, all in the browser on phones, tablets and laptops you already have. If most of your orders come from delivery apps rather than tables, prioritise a system built around delivery integrations instead.
 
 Whatever you choose, run the eight questions above. The right POS is the one that makes a full Saturday evening feel calm.
 

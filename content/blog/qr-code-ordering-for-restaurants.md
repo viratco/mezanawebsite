@@ -67,7 +67,7 @@ Only the second and third change how your café runs. If your current QR opens a
 
 It suits table-service cafés and restaurants with regular rushes, young or office crowds, and menus with customisations. It matters less for a counter-only tea stall or a café that is mostly takeaway.
 
-Mezana includes QR table ordering with an accept step at the counter, a kitchen screen and printable table cards, and it runs in the browser on the devices you already have. [See how it works](/#journey).
+Mezana’s [QR code ordering system](/qr-code-ordering-system/) has an accept step at the counter, a kitchen screen and printable table cards, and it runs in the browser on the devices you already have. [See how it works](/#journey).
 
 ## Frequently asked questions
 

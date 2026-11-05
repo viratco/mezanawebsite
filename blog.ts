@@ -103,6 +103,7 @@ function shell(o: { title: string; description: string; url: string; site: Site;
     <meta name="description" content="${esc(o.description)}" />
     <meta name="theme-color" content="#170609" />
     <link rel="canonical" href="${o.url}" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/brand/icon.svg" type="image/svg+xml" />
     <link rel="icon" href="/brand/favicon-32.png" sizes="32x32" type="image/png" />
     <link rel="apple-touch-icon" href="/brand/apple-touch-icon.png" />

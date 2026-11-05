@@ -13,6 +13,7 @@ import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
 import Lenis from "lenis";
 import { inject } from "@vercel/analytics";
 import Clarity from "@microsoft/clarity";
+import { googleAds } from "./ads";
 
 declare const __CLARITY_ID__: string;
 
@@ -20,6 +21,8 @@ gsap.registerPlugin(ScrollTrigger, SplitText, DrawSVGPlugin);
 
 // Vercel Web Analytics: visitors and page views (no cookies).
 inject();
+
+googleAds();
 
 // Microsoft Clarity: session recordings and heatmaps. Off until clarityProjectId is set in site.config.json.
 if (__CLARITY_ID__) {

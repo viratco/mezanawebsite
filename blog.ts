@@ -19,13 +19,44 @@ export type Post = {
   faq: { q: string; a: string }[];
 };
 
-type Site = { siteUrl: string; waLink: string };
+type Site = { siteUrl: string; waLink: string; waNumber: string };
 
-const DIR = "content/blog";
+export type Page = { slug: string; title: string; description: string; updated: string; waLink: string; body: string; faq: { q: string; a: string }[] };
+
+const DIR = "content/blog", PAGES = "content/pages";
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const plain = (html: string) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 const slugify = (s: string) => plain(s).normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/&[a-z]+;/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 const longDate = (d: string) => new Date(d + "T00:00:00Z").toLocaleDateString("en-IN", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" });
+
+function frontMatter(file: string, src: string) {
+  const m = src.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  if (!m) throw new Error(`${file}: missing front matter`);
+  const meta: Record<string, string> = {};
+  for (const line of m[1].split("\n")) { const i = line.indexOf(":"); if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim(); }
+  for (const k of ["title", "description"]) if (!meta[k]) throw new Error(`${file}: front matter needs "${k}"`);
+  return { meta, body: m[2] };
+}
+
+// Standalone pages (like /founding-cafes/): an HTML body in content/pages, wrapped in the same header and footer.
+// Questions written as <details><summary>…</summary><div>…</div></details> also go into FAQ structured data.
+export function readPages(site: Site): Page[] {
+  if (!fs.existsSync(PAGES)) return [];
+  return fs.readdirSync(PAGES).filter((f) => f.endsWith(".html")).map((f) => {
+    const { meta, body } = frontMatter(f, fs.readFileSync(`${PAGES}/${f}`, "utf8"));
+    const wa = meta.whatsapp && site.waNumber ? `https://wa.me/${site.waNumber}?text=${encodeURIComponent(meta.whatsapp.replace(/\\n/g, "\n"))}` : site.waLink;
+    const html = body.replace(/\{\{WA_LINK\}\}/g, wa).replace(/\{\{SITE_URL\}\}/g, site.siteUrl);
+    const faq = [...html.matchAll(/<summary>([\s\S]*?)<\/summary>\s*<div>([\s\S]*?)<\/div>/g)].map(([, q, a]) => ({ q: plain(q), a: plain(a) }));
+    return { slug: f.replace(/\.html$/, ""), title: meta.title, description: meta.description, updated: meta.updated || new Date().toISOString().slice(0, 10), waLink: wa, body: html, faq };
+  });
+}
+
+function standalonePage(p: Page, site: Site, assets: { css: string[]; js: string }, brand: { emblem: string; word: string }) {
+  const url = `${site.siteUrl}/${p.slug}/`;
+  const ld: object[] = [org(site), { "@type": "WebPage", url, name: p.title, description: p.description, inLanguage: "en-IN", publisher: { "@id": `${site.siteUrl}/#org` } }];
+  if (p.faq.length) ld.push({ "@type": "FAQPage", mainEntity: p.faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) });
+  return shell({ title: p.title, description: p.description, url, site: { ...site, waLink: p.waLink }, ...assets, brand, ld, type: "website", body: p.body });
+}
 
 export function readPosts(): Post[] {
   if (!fs.existsSync(DIR)) return [];
@@ -33,13 +64,8 @@ export function readPosts(): Post[] {
     .readdirSync(DIR)
     .filter((f) => f.endsWith(".md"))
     .map((f) => {
-      const src = fs.readFileSync(`${DIR}/${f}`, "utf8");
-      const m = src.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
-      if (!m) throw new Error(`${f}: missing front matter`);
-      const meta: Record<string, string> = {};
-      for (const line of m[1].split("\n")) { const i = line.indexOf(":"); if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim(); }
-      for (const k of ["title", "description", "date"]) if (!meta[k]) throw new Error(`${f}: front matter needs "${k}"`);
-      const body = m[2];
+      const { meta, body } = frontMatter(f, fs.readFileSync(`${DIR}/${f}`, "utf8"));
+      if (!meta.date) throw new Error(`${f}: front matter needs "date"`);
       // Questions under "## Frequently asked questions" also go into FAQ structured data.
       const faq: Post["faq"] = [];
       const faqPart = body.split(/^## Frequently asked questions\s*$/m)[1];
@@ -208,9 +234,12 @@ export function blog(site: () => Site, brand: () => { emblem: string; word: stri
       server.middlewares.use(async (req, res, next) => {
         const path = (req.url || "").split("?")[0];
         if (path === "/blog/rss.xml") { res.setHeader("Content-Type", "application/rss+xml"); res.end(rss(readPosts(), site())); return; }
+        const assets = { css: [] as string[], js: "/src/blog.ts" };
+        const pg = readPages(site()).find((p) => path === `/${p.slug}` || path === `/${p.slug}/`);
+        if (pg) { res.setHeader("Content-Type", "text/html"); res.end(await server.transformIndexHtml(path, standalonePage(pg, site(), assets, brand()))); return; }
         const m = path.match(/^\/blog\/?(?:([a-z0-9-]+)\/?)?$/);
         if (!m) return next();
-        const all = readPosts(), assets = { css: [], js: "/src/blog.ts" };
+        const all = readPosts();
         let html: string;
         if (!m[1]) html = indexPage(all, site(), assets, brand());
         else { const p = all.find((q) => q.slug === m[1]); if (!p) return next(); html = postPage(p, all, site(), assets, brand()); }
@@ -226,6 +255,7 @@ export function blog(site: () => Site, brand: () => { emblem: string; word: stri
       this.emitFile({ type: "asset", fileName: "blog/index.html", source: indexPage(all, site(), assets, brand()) });
       for (const p of all) this.emitFile({ type: "asset", fileName: `blog/${p.slug}/index.html`, source: postPage(p, all, site(), assets, brand()) });
       this.emitFile({ type: "asset", fileName: "blog/rss.xml", source: rss(all, site()) });
+      for (const p of readPages(site())) this.emitFile({ type: "asset", fileName: `${p.slug}/index.html`, source: standalonePage(p, site(), assets, brand()) });
     },
   };
 }

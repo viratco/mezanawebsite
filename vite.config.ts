@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import { defineConfig, type Plugin } from "vite";
-import { blog, readPosts } from "./blog";
+import { blog, readPages, readPosts } from "./blog";
 
 type SiteConfig = {
   whatsappNumber: string;
@@ -10,11 +10,14 @@ type SiteConfig = {
   appUrl: string;
   siteUrl: string;
   clarityProjectId: string;
+  googleAdsId: string;
+  googleAdsSendTo: string;
 };
 
 const readConfig = (): SiteConfig => JSON.parse(fs.readFileSync("site.config.json", "utf8"));
 const waLink = (c: SiteConfig) => { const wa = c.whatsappNumber.replace(/\D/g, ""); return wa ? `https://wa.me/${wa}?text=${encodeURIComponent(c.whatsappMessage)}` : "/#start"; };
 const brandSvg = (f: string) => fs.readFileSync(`src/brand/${f}`, "utf8");
+const siteInfo = () => { const c = readConfig(); return { siteUrl: c.siteUrl, waLink: waLink(c), waNumber: c.whatsappNumber.replace(/\D/g, "") }; };
 const text = (html: string) => html.replace(/<[^>]+>/g, "").replace(/\s+/g, " ").trim();
 
 // What search engines read about Mezana: the company, the product, and the FAQ exactly as shown on the page.
@@ -46,6 +49,7 @@ function structuredData(html: string, c: SiteConfig, wa: string) {
       url: `${c.siteUrl}/`,
       image: `${c.siteUrl}/brand/og.jpg`,
       publisher: { "@id": org["@id"] },
+      offers: { "@type": "Offer", price: "2000", priceCurrency: "INR", url: `${c.siteUrl}/founding-cafes/`, priceSpecification: { "@type": "UnitPriceSpecification", price: "2000", priceCurrency: "INR", unitText: "MONTH" } },
     },
     { "@type": "FAQPage", mainEntity: faq },
   ];
@@ -81,7 +85,8 @@ function site(): Plugin {
     generateBundle() {
       const { siteUrl } = readConfig();
       const today = new Date().toISOString().slice(0, 10), posts = readPosts();
-      const urls = [[`${siteUrl}/`, today], [`${siteUrl}/blog/`, posts[0]?.updated ?? today], ...posts.map((p) => [`${siteUrl}/blog/${p.slug}/`, p.updated])];
+      const pages = readPages(siteInfo());
+      const urls = [[`${siteUrl}/`, today], ...pages.map((p) => [`${siteUrl}/${p.slug}/`, p.updated]), [`${siteUrl}/blog/`, posts[0]?.updated ?? today], ...posts.map((p) => [`${siteUrl}/blog/${p.slug}/`, p.updated])];
       this.emitFile({ type: "asset", fileName: "robots.txt", source: `User-agent: *\nAllow: /\n\nSitemap: ${siteUrl}/sitemap.xml\n` });
       this.emitFile({
         type: "asset",
@@ -93,7 +98,11 @@ function site(): Plugin {
 }
 
 export default defineConfig({
-  plugins: [site(), blog(() => { const c = readConfig(); return { siteUrl: c.siteUrl, waLink: waLink(c) }; }, () => ({ emblem: brandSvg("emblem.svg"), word: brandSvg("wordmark.svg") }))],
-  define: { __CLARITY_ID__: JSON.stringify(readConfig().clarityProjectId.trim()) },
+  plugins: [site(), blog(siteInfo, () => ({ emblem: brandSvg("emblem.svg"), word: brandSvg("wordmark.svg") }))],
+  define: {
+    __CLARITY_ID__: JSON.stringify(readConfig().clarityProjectId.trim()),
+    __GADS_ID__: JSON.stringify((readConfig().googleAdsId ?? "").trim()),
+    __GADS_SEND_TO__: JSON.stringify((readConfig().googleAdsSendTo ?? "").trim()),
+  },
   build: { target: "es2020", assetsInlineLimit: 0 },
 });

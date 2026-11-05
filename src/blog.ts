@@ -4,11 +4,13 @@ import "./blog.css";
 
 import { inject } from "@vercel/analytics";
 import Clarity from "@microsoft/clarity";
+import { googleAds } from "./ads";
 
 declare const __CLARITY_ID__: string;
 
 // Blog pages: same analytics as the homepage, none of its animation code.
 inject();
+googleAds();
 if (__CLARITY_ID__) {
   Clarity.init(__CLARITY_ID__);
   Clarity.setTag("page-type", "blog");

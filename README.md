@@ -14,6 +14,8 @@ It is separate from the POS app in `../frontend`, which runs at `app.mezana.in`.
 | `appUrl` | Where "Café login" goes: `https://app.mezana.in`. |
 | `siteUrl` | `https://www.mezana.in`, the address the site is served on (Vercel redirects mezana.in there). Used for the canonical link, link preview image, structured data, robots.txt and sitemap.xml. |
 | `clarityProjectId` | Microsoft Clarity project ID (clarity.microsoft.com → your project → Settings → Overview). Turns on session recordings and heatmaps. Left empty, Clarity is off. |
+| `googleAdsId` | Google Ads tag ID, like `AW-123456789` (Google Ads → Tools → Data manager / Google tag). Left empty, no Google Ads code loads. |
+| `googleAdsSendTo` | The conversion's “send_to” value, like `AW-123456789/AbCdEfGh` (Goals → Conversions → your conversion → Tag setup). With it set, every tap on a WhatsApp button counts as a conversion. |
 
 ## Blog
 

@@ -2231,3 +2231,197 @@ em {
     grid-column: 1 / -1;
   }
 }
+
+/* ───────────────────────── 7b · whatsapp bills (₹0) ───────────────────────── */
+.wabill {
+  background:
+    radial-gradient(45% 55% at 78% 45%, rgba(37, 211, 102, 0.08), transparent 70%),
+    var(--paper);
+  padding: clamp(100px, 13vw, 170px) 0;
+  overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.wabill-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(40px, 6vw, 90px);
+}
+.ticks-dark li {
+  color: var(--text-2);
+}
+.ticks-dark b {
+  color: var(--text);
+}
+.ticks-dark .ic {
+  color: var(--maroon-2);
+}
+.wabill-visual {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 22px;
+}
+.wa-phone {
+  width: min(380px, 88vw);
+  border-radius: 38px;
+  background: #0b141a;
+  padding: 10px;
+  box-shadow: 0 50px 100px -40px rgba(23, 6, 9, 0.6);
+}
+.wa-top {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 16px 12px;
+  background: #1f2c34;
+  border-radius: 30px 30px 0 0;
+  color: #e9edef;
+}
+.wa-av {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--maroon-2);
+  color: var(--ivory);
+  font-style: normal;
+  font-weight: 700;
+}
+.wa-top span {
+  display: grid;
+  line-height: 1.2;
+}
+.wa-top b {
+  font-size: 16px;
+  font-weight: 600;
+}
+.wa-top em {
+  font-style: normal;
+  font-size: 13px;
+  color: #8696a0;
+}
+.wa-chat {
+  padding: 18px 14px 22px;
+  border-radius: 0 0 30px 30px;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255, 255, 255, 0.03) 0 2px, transparent 3px) 0 0 / 26px 26px,
+    #0b141a;
+}
+.wa-msg {
+  margin-left: 34px;
+  padding: 10px 12px 8px;
+  border-radius: 14px 4px 14px 14px;
+  background: #005c4b;
+  color: #e9edef;
+  font-size: 14.5px;
+  line-height: 1.45;
+}
+.wa-msg p + p {
+  margin-top: 8px;
+}
+.wa-link {
+  color: #53bdeb;
+  word-break: break-all;
+}
+.wa-card {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 4px;
+  padding: 10px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.22);
+}
+.wa-card-ic {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: var(--ivory);
+  color: var(--maroon);
+  flex: none;
+}
+.wa-card b {
+  display: block;
+  font-size: 14px;
+}
+.wa-card em {
+  font-style: normal;
+  font-size: 12.5px;
+  color: #a8c4bd;
+}
+.wa-time {
+  display: block;
+  margin-top: 4px;
+  text-align: right;
+  font-size: 11.5px;
+  color: #9fd8c8;
+}
+.wa-cost {
+  width: min(380px, 88vw);
+  padding: 22px 24px 18px;
+  border-radius: 26px;
+  background: var(--ink);
+  color: var(--ivory);
+  box-shadow: 0 40px 80px -40px rgba(23, 6, 9, 0.6);
+}
+.wa-cost-k {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-2);
+}
+.wa-cost-v {
+  display: block;
+  margin-top: 2px;
+  font-size: clamp(3.6rem, 8vw, 5rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--gold-3);
+}
+.wa-cost-list {
+  margin-top: 14px;
+  display: grid;
+}
+.wa-cost-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px dashed rgba(247, 238, 221, 0.16);
+  font-size: 15px;
+  color: rgba(247, 238, 221, 0.62);
+}
+.wa-cost-list em {
+  font-style: normal;
+  text-align: right;
+}
+.wa-cost-list .wa-cost-us {
+  color: var(--ivory);
+  font-weight: 650;
+}
+.wa-cost-us em {
+  color: var(--gold-2);
+}
+.motion .wa-msg {
+  animation: wa-pop 0.6s var(--ease) both;
+  animation-timeline: view();
+  animation-range: entry 10% cover 35%;
+}
+@keyframes wa-pop {
+  from {
+    transform: translateY(24px) scale(0.94);
+    opacity: 0;
+  }
+}
+@media (max-width: 860px) {
+  .wabill-grid {
+    grid-template-columns: 1fr;
+  }
+}

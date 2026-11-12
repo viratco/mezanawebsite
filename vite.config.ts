@@ -45,7 +45,7 @@ function structuredData(html: string, c: SiteConfig, wa: string) {
       applicationCategory: "BusinessApplication",
       applicationSubCategory: "Restaurant POS",
       operatingSystem: "Web browser (Android, iOS, Windows, macOS)",
-      description: "Dine-in POS software for cafés and restaurants in India: QR table ordering, kitchen screen, GST billing, UPI, cash and card payments, and offline billing.",
+      description: "Dine-in POS software for cafés and restaurants in India: QR table ordering, kitchen screen, GST billing, bills sent free on WhatsApp, UPI, cash and card payments, and offline billing.",
       url: `${c.siteUrl}/`,
       image: `${c.siteUrl}/brand/og.jpg`,
       publisher: { "@id": org["@id"] },
